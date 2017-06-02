@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">Biometrics</string>
+    <string name="acc">Acceleration:</string>
+    <string name="gyr">Gyroscope:</string>
+    <string name="temp">Temperature:</string>
+    <string name="prox">Proximity:</string>
+    <string name="light">Luminosity:</string>
+    <string name="mag">Magnetic Field:</string>
+    <string name="grav">Gravity:</string>
+    <string name="linAcc">Linear Acceleration:</string>
+    <string name="press">Air Pressure:</string>
+    <string name="humid">Relative Humidity:</string>
+    <string name="rot">Rotation Vector:</string>
 </resources>

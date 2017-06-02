@@ -14,15 +14,15 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.widget.TextView;
 
-public class Sensors extends Activity implements SensorEventListener{
+public class Sensors extends Activity /*implements SensorEventListener*/{
 
     private TextView xText, yText, zText;
     private Sensor mySensor;
     private SensorManager SM;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState){
+    //@Override
+    //protected void onCreate(Bundle savedInstanceState){
 
-    }
+    //}
 
 }
