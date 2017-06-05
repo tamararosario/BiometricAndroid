@@ -11,7 +11,7 @@ import android.hardware.Sensor;
 public class MainActivity extends AppCompatActivity {
 
     SensorManager sm = null;
-    TextView accText = null;
+    TextView accText = null;    // Create textViews for all sensors
     TextView gyrText = null;
     TextView tempText = null;
     TextView proxText = null;
@@ -23,16 +23,13 @@ public class MainActivity extends AppCompatActivity {
     TextView humText = null;
     TextView rotText = null;
 
+    Application db = new Application(); // Initialize database object
+
     /* This responds to sensor events */
     SensorEventListener sel = new SensorEventListener(){
-        public void onAccuracyChanged(Sensor sensor, int accuracy) {
-			/* Isn't required for this example */
+        public void onAccuracyChanged(Sensor sensor, int accuracy) {}
 
-        }
         public void onSensorChanged(SensorEvent event) {
-			/* Write the accelerometer values to the TextView */
-            //float[] values = event.values;
-            //accText.setText("x: "+values[0]+"\ny: "+values[1]+"\nz: "+values[2]);
             synchronized (this){
                 switch (event.sensor.getType()) {
                     case Sensor.TYPE_ACCELEROMETER:
@@ -42,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
                         float yA = event.values[1];
                         float zA = event.values[2];
                         String accelerationOut = String.format("X: %.2f Y: %.2f Z: %.2f", xA, yA, zA);
+                        db.putAcc(xA, yA, zA);
                         accText.setText(accelerationOut);
                         break;
                     case Sensor.TYPE_GYROSCOPE:
@@ -53,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
                         gyrText.setText(gyroscopeOut);
                         break;
                     case Sensor.TYPE_AMBIENT_TEMPERATURE:
+                        //Measures the ambient room temperature in degrees Celsius
                         float temp = event.values[0];
                         String tempOut = String.format("%.2f C", temp);
                         tempText.setText(tempOut);
@@ -78,7 +77,8 @@ public class MainActivity extends AppCompatActivity {
                         magText.setText(magneticfiedlOut);
                         break;
                     case Sensor.TYPE_GRAVITY:
-                        //Measures the ambient geomagnetic field for all three physical axes (x, y, z) in mircoT.
+                        /*Measures the force of gravity in m/s2 that is applied to a device on all
+                        three physical axes (x,y,z)*/
                         float xGr = event.values[0];
                         float yGr = event.values[1];
                         float zGr = event.values[2];
@@ -86,7 +86,8 @@ public class MainActivity extends AppCompatActivity {
                         gravText.setText(gravityOut);
                         break;
                     case Sensor.TYPE_LINEAR_ACCELERATION:
-                        //Measures the ambient geomagnetic field for all three physical axes (x, y, z) in mircoT.
+                        /*Measures the acceleration force in m/s2 that is applied to a device on all
+                        three physical axes (x,y, and z), excluding the force of gravity*/
                         float xL = event.values[0];
                         float yL = event.values[1];
                         float zL = event.values[2];
@@ -94,19 +95,20 @@ public class MainActivity extends AppCompatActivity {
                         linAccText.setText(linAccOut);
                         break;
                     case Sensor.TYPE_PRESSURE:
-                        //Measures the ambient geomagnetic field for all three physical axes (x, y, z) in mircoT.
+                        //Measures the ambien air pressure in hPa or mbar
                         float pressure = event.values[0];
                         String pressureOut = String.format("%.2f hPA", pressure);
                         pressText.setText(pressureOut);
                         break;
                     case Sensor.TYPE_RELATIVE_HUMIDITY:
-                        //Measures the ambient geomagnetic field for all three physical axes (x, y, z) in mircoT.
+                        //Measures the relative ambient humidity in percent (%)
                         float humidity = event.values[0];
                         String humidOut = String.format("%.2f%", humidity);
                         humText.setText(humidOut);
                         break;
                     case Sensor.TYPE_ROTATION_VECTOR:
-                        //Measures the ambient geomagnetic field for all three physical axes (x, y, z) in mircoT.
+                        /*Measures the orientation of a device by providng the three elemtns of the
+                        device's rotation vector*/
                         float xR = event.values[0];
                         float yR = event.values[1];
                         float zR = event.values[2];
@@ -118,7 +120,6 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
-    /* Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -130,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
         //List<Sensor> deviceSensors = sm.getSensorList(Sensor.TYPE_ALL);
 
 
-        /* This corresponds to a TextView element in main.xml with android:id="@+id/accText" */
+        /* Initialize textViews objects*/
         accText = (TextView)findViewById(R.id.textView1);
         gyrText = (TextView)findViewById(R.id.textView2);
         tempText = (TextView)findViewById(R.id.textView3);
@@ -143,11 +144,7 @@ public class MainActivity extends AppCompatActivity {
         humText = (TextView)findViewById(R.id.textView10);
         rotText = (TextView)findViewById(R.id.textView11);
 
-
-
-        /* Get list of accelerometers */
-        //list = sm.getSensorList(Sensor.TYPE_ACCELEROMETER);
-        //list.add(sm.getSensorList(Sensor.TYPE_GYROSCOPE));
+        // Register listeners for all the sensors
         sm.registerListener(sel, sm.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_NORMAL);
         sm.registerListener(sel, sm.getDefaultSensor(Sensor.TYPE_GYROSCOPE), SensorManager.SENSOR_DELAY_NORMAL);
         sm.registerListener(sel, sm.getDefaultSensor(Sensor.TYPE_AMBIENT_TEMPERATURE), SensorManager.SENSOR_DELAY_NORMAL);
