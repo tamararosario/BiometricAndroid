@@ -164,6 +164,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
         /* If there are any accelerometers register a listener to the first else
            print a little error message */
         /*if(list.size()>0){
@@ -174,14 +175,14 @@ public class MainActivity extends AppCompatActivity {
         }*/
     }
 
-    @Override
-    protected void onStop() {
+    //@Override
+    //protected void onStop() {
 		/* Always a good idea to unregister, disconnect, close, etc things */
         //if(list.size()>0){
 			/* This actually unregisters a listener for all sensors, but it can be done
 			   on a sensor by sensor basis */
-        sm.unregisterListener(sel);
+        //sm.unregisterListener(sel);
         //}
-        super.onStop();
-    }
+        //super.onStop();
+    //}
 }
