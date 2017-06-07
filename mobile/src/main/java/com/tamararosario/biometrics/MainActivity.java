@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
                         //Measures the ambient room temperature in degrees Celsius
                         float temp = event.values[0];
                         String tempOut = String.format("%.2f C", temp);
-                        db.putAtemp(temp);
+                        db.putAmbTemp(temp);
                         tempText.setText(tempOut);
                         break;
                     case Sensor.TYPE_PROXIMITY:
@@ -67,19 +67,19 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case Sensor.TYPE_LIGHT:
                         // Measures the ambient light level (illumination) in lx.
-                        float ligth = event.values[0];
-                        String lumninoxityOut = String.format("%.2f lx", ligth);
-                        db.putLight(ligth);
-                        lightText.setText(lumninoxityOut);
+                        float light = event.values[0];
+                        String luminosityOut = String.format("%.2f lx", light);
+                        db.putLight(light);
+                        lightText.setText(luminosityOut);
                         break;
                     case Sensor.TYPE_MAGNETIC_FIELD:
                         //Measures the ambient geomagnetic field for all three physical axes (x, y, z) in mircoT.
                         float xM = event.values[0];
                         float yM = event.values[1];
                         float zM = event.values[2];
-                        String magneticfiedlOut = String.format("X: %.2f Y: %.2f Z: %.2f", xM, yM, zM);
+                        String magneticFieldOut = String.format("X: %.2f Y: %.2f Z: %.2f", xM, yM, zM);
                         db.putMagnetic(xM,yM,zM);
-                        magText.setText(magneticfiedlOut);
+                        magText.setText(magneticFieldOut);
                         break;
                     case Sensor.TYPE_GRAVITY:
                         /*Measures the force of gravity in m/s2 that is applied to a device on all
