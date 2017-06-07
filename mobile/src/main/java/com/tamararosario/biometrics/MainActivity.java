@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     TextView humText = null;
     TextView rotText = null;
 
-    Application db = new Application(); // Initialize database object
+    Application db;             // database object
 
     /* This responds to sensor events */
     SensorEventListener sel = new SensorEventListener(){
@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
             synchronized (this){
                 switch (event.sensor.getType()) {
                     case Sensor.TYPE_ACCELEROMETER:
-                    /* Get the Measures the acceleration force in m/s2 that is applied to a device
+                    /*Measures the acceleration force in m/s2 that is applied to a device
                     on all three physical axes (x, y, and z), including the force of gravity.*/
                         float xA = event.values[0];
                         float yA = event.values[1];
@@ -125,11 +125,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Initialize database
+        //db = new Application();
+        db = ((Application) getApplicationContext());
+
         /* Get a SensorManager instance */
         sm = (SensorManager)getSystemService(SENSOR_SERVICE);
 
         //List<Sensor> deviceSensors = sm.getSensorList(Sensor.TYPE_ALL);
-
 
         /* Initialize textViews objects*/
         accText = (TextView)findViewById(R.id.textView1);
@@ -156,11 +159,6 @@ public class MainActivity extends AppCompatActivity {
         sm.registerListener(sel, sm.getDefaultSensor(Sensor.TYPE_PRESSURE), SensorManager.SENSOR_DELAY_NORMAL);
         sm.registerListener(sel, sm.getDefaultSensor(Sensor.TYPE_RELATIVE_HUMIDITY), SensorManager.SENSOR_DELAY_NORMAL);
         sm.registerListener(sel, sm.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR), SensorManager.SENSOR_DELAY_NORMAL);
-
-
-
-
-
 
         /* If there are any accelerometers register a listener to the first else
            print a little error message */
