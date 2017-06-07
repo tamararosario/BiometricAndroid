@@ -27,6 +27,12 @@ public class Application extends android.app.Application {
                 .server("https://parseapi.back4app.com/")
                 .build());
 
+        ParseObject accelerometer = new ParseObject("Accelerometer");
+      //  accelerometer.put("xA", accelerationOut.getText().toString());
+        accelerometer.saveInBackground();
+
+        ParseObject Proximity = new ParseObject("Proximity");
+        //Proximity.put("distance",proximityOut.getText().toString());
         ParseObject testObject = new ParseObject("TestObject");
         testObject.put("foo", "bar");
         testObject.saveInBackground();
@@ -39,4 +45,34 @@ public class Application extends android.app.Application {
         //put("z", zA);
     }
 
+
+    public void putGyr(float xG, float yG, float zG) {
+    }
+
+    public void putAtemp(float temp) {
+    }
+
+    public void putProx(float distance) {
+    }
+
+    public void putLight(float ligth) {
+    }
+
+    public void putMagnetic(float xM, float yM, float zM) {
+    }
+
+    public void putGravity(float xGr, float yGr, float zGr) {
+    }
+
+    public void putLinearAcc(float xL, float yL, float zL) {
+    }
+
+    public void putPressure(float pressure) {
+    }
+
+    public void putRelativeHumidity(float humidity) {
+    }
+
+    public void putRotationVector(float xR, float yR, float zR) {
+    }
 }

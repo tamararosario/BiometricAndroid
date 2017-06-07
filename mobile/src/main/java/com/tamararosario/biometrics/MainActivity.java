@@ -48,24 +48,28 @@ public class MainActivity extends AppCompatActivity {
                         float yG = event.values[1];
                         float zG = event.values[2];
                         String gyroscopeOut = String.format("X: %.2f Y: %.2f Z: %.2f", xG, yG, zG);
+                        db.putGyr(xG,yG,zG);
                         gyrText.setText(gyroscopeOut);
                         break;
                     case Sensor.TYPE_AMBIENT_TEMPERATURE:
                         //Measures the ambient room temperature in degrees Celsius
                         float temp = event.values[0];
                         String tempOut = String.format("%.2f C", temp);
+                        db.putAtemp(temp);
                         tempText.setText(tempOut);
                         break;
                     case Sensor.TYPE_PROXIMITY:
                         // Measures the proximity of an object in cm relative to the view screen of a device.
                         float distance = event.values[0];
                         String proximityOut = String.format("%.2f cm", distance);
+                        db.putProx(distance);
                         proxText.setText(proximityOut);
                         break;
                     case Sensor.TYPE_LIGHT:
                         // Measures the ambient light level (illumination) in lx.
                         float ligth = event.values[0];
                         String lumninoxityOut = String.format("%.2f lx", ligth);
+                        db.putLight(ligth);
                         lightText.setText(lumninoxityOut);
                         break;
                     case Sensor.TYPE_MAGNETIC_FIELD:
@@ -74,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
                         float yM = event.values[1];
                         float zM = event.values[2];
                         String magneticfiedlOut = String.format("X: %.2f Y: %.2f Z: %.2f", xM, yM, zM);
+                        db.putMagnetic(xM,yM,zM);
                         magText.setText(magneticfiedlOut);
                         break;
                     case Sensor.TYPE_GRAVITY:
@@ -83,6 +88,7 @@ public class MainActivity extends AppCompatActivity {
                         float yGr = event.values[1];
                         float zGr = event.values[2];
                         String gravityOut = String.format("X: %.2f Y: %.2f Z: %.2f", xGr, yGr, zGr);
+                        db.putGravity(xGr,yGr,zGr);
                         gravText.setText(gravityOut);
                         break;
                     case Sensor.TYPE_LINEAR_ACCELERATION:
@@ -92,18 +98,21 @@ public class MainActivity extends AppCompatActivity {
                         float yL = event.values[1];
                         float zL = event.values[2];
                         String linAccOut = String.format("X: %.2f Y: %.2f Z: %.2f", xL, yL, zL);
+                        db.putLinearAcc(xL,yL,zL);
                         linAccText.setText(linAccOut);
                         break;
                     case Sensor.TYPE_PRESSURE:
                         //Measures the ambien air pressure in hPa or mbar
                         float pressure = event.values[0];
                         String pressureOut = String.format("%.2f hPA", pressure);
+                        db.putPressure(pressure);
                         pressText.setText(pressureOut);
                         break;
                     case Sensor.TYPE_RELATIVE_HUMIDITY:
                         //Measures the relative ambient humidity in percent (%)
                         float humidity = event.values[0];
                         String humidOut = String.format("%.2f%", humidity);
+                        db.putRelativeHumidity(humidity);
                         humText.setText(humidOut);
                         break;
                     case Sensor.TYPE_ROTATION_VECTOR:
@@ -113,6 +122,7 @@ public class MainActivity extends AppCompatActivity {
                         float yR = event.values[1];
                         float zR = event.values[2];
                         String rotOut = String.format("X: %.2f Y: %.2f Z: %.2f", xR, yR, zR);
+                        db.putRotationVector(xR,yR,zR);
                         rotText.setText(rotOut);
                         break;
                 }
